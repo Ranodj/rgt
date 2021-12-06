@@ -51,7 +51,7 @@
     </ul>
     <br />
     <ul>
-      <li>update(float dt): uses the deltaTime (time since the last frame) to update the animation</li>
+      <li>update(float dt): uses the deltaTime (time since the last update) to update the animation</li>
       <li>getCurrentFrame(): returns a pointer to the current frame of the animation</li>
     </ul>
   </li>
@@ -61,12 +61,19 @@
   
 <h1>Function syntax: </h1>
 
-<h2>Core functions:</h2>
-
 <ul>
   <li>distance(vector2 a, vector2 b): calculates the distance between points a and b, returns that distance</li>
   <li>distanceSquared(vector2 a, vector2 b): calculates the distance squared between a and b, and returns that distance (much faster than just calculating distance)</li>
 </ul>
-
+<br />
 <ul>
+  <li>getExePath(): returns the absolute path to the game's executable (including the exe file) as an std::string</li>
+  <li>getExeDir(): return the absolute path to the game's executable (excluding the exe file) as an std::string</li>
+  <li>fileExists(std::string filepath, bool startInExeDir = true): checks if the file at filepath exists</li>
+  <li>writeToFile(std::string filepath, std::string contents, bool startInExeDir = true): writes contents to the file at filepath</li>
+  <li>readFromFile(std::string filepath, bool startInExeDir = true): returns contents of file at filepath as a std::string</li>
+</ul>
+<br />
+<ul>
+  
 </ul>
