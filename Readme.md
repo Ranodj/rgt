@@ -1,4 +1,4 @@
-<h1>Notes</h1>
+<h1>Miscellaneous Notes</h1>
 <ul>
   <li>Many functions accept pointers as arguments as well as values. If a function does this, only the version that acceps values will be documented in the <b>Function Syntax</b> section.
 </ul>
@@ -33,14 +33,14 @@
     <br />
     <ul>
       <li>camera(vector2 position, vector2 windowsize, int mode = CAMERAMODE_CENTERED): takes in the position of the camera, the size of the game window, and the mode of the camera, creates a new camera with these properties</li>
-      <li>applyCamera(vector2 position) takes an absolute position, converts it to a position relative to the top left corner of the screen, and returns that</li>
+      <li>applyCamera(vector2 position): takes an absolute position, converts it to a position relative to the top left corner of the screen, and returns that</li>
       <li>setMode(int mode): takes in a mode and sets the camera's mode</li>
       <li>setWindowSize(vector2 windowSize): takes in a the size of the game window and sets the camera's window size to this</li>
     </ul>
     <br />
     <ul>
       <li>setWindowSize() can be inefficient due to having to re-calculate the mode of the camera in order to change the window size.</li>
-      <li>The mode is where the picture is relative to the camera's position. For example, if the camera is set to CAMERAMODE_TOPLEFT, the view of the camera will be a rectangle with min(cameraPosition) and max(cameraPosition + windowSize). Likewise, if the camera is set to CAMERAMODE_BOTTOMRIGHT, the view of the camera will be a rectangle with min(cameraPosition - windowSize) and max(cameraPosition)</li>
+      <li>The mode is where the picture is relative to the camera's position. For example, if the camera is set to CAMERAMODE_TOPLEFT, the camera position will be the top left corner of the view. Likewise, if the camera is set to CAMERAMODE_BOTTOMRIGHT, the camera position will be the bottom right of the view</li>
     </ul>
   </li>
   
@@ -75,5 +75,5 @@
 </ul>
 <br />
 <ul>
-  <li>in functions involving a filepath, if arg "startInExeDir" is true, the filepath is relative to the folder the game's executable is in. Else the filepath is absolute</li>
+  <li>in functions involving a filepath, if arg "startInExeDir" is true, the filepath is relative to the game's executable directory. Else the filepath is absolute</li>
 </ul>
