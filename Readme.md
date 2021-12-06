@@ -75,5 +75,5 @@
 </ul>
 <br />
 <ul>
-  
+  <li>in functions involving a filepath, if arg "startInExeDir" is true, the filepath is relative to the folder the game's executable is in. Else the filepath is absolute</li>
 </ul>
