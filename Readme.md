@@ -1,6 +1,7 @@
 <h1>Miscellaneous Notes</h1>
 <ul>
-  <li>Many functions accept pointers as arguments as well as values. If a function does this, only the version that acceps values will be documented in the <b>Function Syntax</b> section.
+  <li>Many functions accept values as arguments as well as a pointer to that type of value. If a function does this, only the version that acceps values will be documented in the <b>Function Syntax</b> section</li>
+  <li>All functions involving a filepath will have a arg called "startInExeDir" defaulted to true. If startInExeDir is true, the filepath will be relative to to the folder from which the game's executable is running. Else the filepath will be absolute</li>
 </ul>
 
 <hr />
@@ -74,6 +75,3 @@
   <li>readFromFile(std::string filepath, bool startInExeDir = true): returns contents of file at filepath as a std::string</li>
 </ul>
 <br />
-<ul>
-  <li>in functions involving a filepath, if arg "startInExeDir" is true, the filepath is relative to the game's executable directory. Else the filepath is absolute</li>
-</ul>
