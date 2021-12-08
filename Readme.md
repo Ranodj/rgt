@@ -33,7 +33,7 @@
     <br />
     <ul>
       <li>camera(vector2 position, vector2 windowsize, int mode = CAMERAMODE_CENTERED): takes in the position of the camera, the size of the game window, and the mode of the camera, creates a new camera with these properties</li>
-      <li>applyCamera(vector2 position): takes an absolute position, converts it to a position relative to the top left corner of the screen, and returns that</li>
+      <li>applyCameraPosition(vector2 position): takes an absolute position, converts it to a position relative to the top left corner of the screen, and returns that</li>
       <li>setMode(int mode): takes in a mode and sets the camera's mode</li>
       <li>setWindowSize(vector2 windowSize): takes in a the size of the game window and sets the camera's window size to this</li>
     </ul>
