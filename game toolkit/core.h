@@ -196,8 +196,8 @@ private:
 template <typename T>
 struct animation {
 
+public:
 	std::vector<T> frames;
-	int frameCount;
 	float speed;
 
 	float currentFrame;
@@ -206,14 +206,22 @@ struct animation {
 
 		this->currentFrame += this->speed * *dt;
 	}
+	
+	inline void update(float dt) {
+		
+		this->currentFrame += this->speed * dt;	
+	}
 
 	inline T* getCurrentFrame() {
 
-		return frames[(int)this->currentFrame % this->frameCount];
+		return &frames[(int)this->currentFrame % this->frameCount];
 	}
 
 	animation();
 	animation(std::vector<T> frames, float speed);
+	
+private:
+	int frameCount;
 };
 
 //animation end -- file management start
