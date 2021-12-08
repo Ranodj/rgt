@@ -3,6 +3,9 @@
   <li>Many functions accept values as arguments as well as a pointer to that type of value. If a function does this, only the version that acceps values will be documented in the <b>Function Syntax</b> section</li>
   <li>All functions involving a filepath will have a arg called "startInExeDir" defaulted to true. If startInExeDir is true, the filepath will be relative to to the folder from which the game's executable is running. Else the filepath will be absolute</li>
 </ul>
+<ul>
+  <li>For this code to work, you must instruct your linker to include "shlwapi.lib"</li>
+</ul>
 
 <hr />
 
@@ -75,3 +78,5 @@
   <li>readFromFile(std::string filepath, bool startInExeDir = true): returns contents of file at filepath as a std::string</li>
 </ul>
 <br />
+
+<hr />
