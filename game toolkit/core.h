@@ -161,24 +161,34 @@ struct camera {
 public:
 	vector2 position;
 
-	inline vector2 applyCamera(vector2* objectPosition) {
+	inline vector2 applyPosition(vector2* objectPosition) {
 
-		return *objectPosition - (this->position + this->mode);
+		return *objectPosition - (this->position + this->positionFactor);
 	}
 
-	inline vector2 applyCamera(vector2 objectPosition) {
+	inline vector2 applyPosition(vector2 objectPosition) {
 
-		return objectPosition - (this->position + this->mode);
+		return objectPosition - (this->position + this->positionFactor);
 	}
+
+	void follow(vector2* followPosition, float followSpeed, int followMode = 0);
+	void follow(vector2* followPosition, float* followSpeed, int followMode = 0);
+	void stopFollowing();
 
 	void setMode(int mode);
 	void setWindowSize(vector2 windowSize);
+
+	void update(float dt);
 
 	camera(vector2 position, vector2 windowSize, int mode = 0);
 
 private:
 	vector2 windowSize;
-	vector2 mode;
+	vector2 positionFactor;
+
+	vector2* followPosition;
+	vector2 followPositionFactor;
+	float followSpeed;
 };
 
 //camera end -- animation start

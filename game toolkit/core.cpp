@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "core.h"
+#include "rmath.h"
 
 //vector2 start
 
@@ -33,105 +34,194 @@ void camera::setMode(int mode) {
 	switch (mode) {
 
 	case 0:
-		this->mode = vector2(
+		this->positionFactor = vector2(
 			-this->windowSize.x / 2, -this->windowSize.y / 2
 		);
 		break;
 
 	case 1:
-		this->mode = vector2();
+		this->positionFactor = vector2();
 		break;
 
 	case 2:
-		this->mode = vector2(
+		this->positionFactor = vector2(
 			-this->windowSize.x, 0
 		);
 		break;
 
 	case 3:
-		this->mode = vector2(
+		this->positionFactor = vector2(
 			0, -this->windowSize.y
 		);
 		break;
 
 	case 4:
-		this->mode = vector2(
+		this->positionFactor = vector2(
 			-this->windowSize.x, -this->windowSize.y
 		);
+
+	default:
+		this->positionFactor = vector2(
+			-this->windowSize.x / 2, -this->windowSize.y / 2
+		);
+		break;
 	}
 }
 
 void camera::setWindowSize(vector2 windowSize) {
 
 	//mode is center (0)
-	if (this->mode == vector2(-this->windowSize.x / 2, -this->windowSize.y / 2)) {
+	if (this->positionFactor == vector2(-this->windowSize.x / 2, -this->windowSize.y / 2)) {
 
 		this->windowSize = windowSize;
-		this->mode == vector2(-this->windowSize.x / 2, -this->windowSize.y / 2);
+		this->positionFactor == vector2(-this->windowSize.x / 2, -this->windowSize.y / 2);
 		return;
 	}
 
 	//mode is top_left (1)
-	if (this->mode == vector2()) {
+	if (this->positionFactor == vector2()) {
 
 		this->windowSize = windowSize;
 		return;
 	}
 
 	//mode is top_right (2)
-	if (this->mode == vector2(this->windowSize.x, 0)) {
+	if (this->positionFactor == vector2(this->windowSize.x, 0)) {
 
 		this->windowSize = windowSize;
-		this->mode = vector2(this->windowSize.x, 0);
+		this->positionFactor = vector2(this->windowSize.x, 0);
 		return;
 	}
 
 	//mode is bottom_left (3)
-	if (this->mode == vector2(0, this->windowSize.y)) {
+	if (this->positionFactor == vector2(0, this->windowSize.y)) {
 
 		this->windowSize = windowSize;
-		this->mode = vector2(0, this->windowSize.y);
+		this->positionFactor = vector2(0, this->windowSize.y);
 		return;
 	}
 
 	//mode is bottom_right (4)
 	this->windowSize = windowSize;
-	this->mode = vector2(-windowSize.x, -windowSize.y);
+	this->positionFactor = vector2(-windowSize.x, -windowSize.y);
+}
+
+void camera::update(float dt) {
+
+	if (followPosition == nullptr)
+		return;
+
+	this->position = lerp(this->position, *this->followPosition + this->followPositionFactor - this->positionFactor, this->followSpeed);
+}
+
+void camera::follow(vector2* followPosition, float followSpeed, int followMode) {
+
+	this->followPosition = followPosition;
+	this->followSpeed = followSpeed;
+
+	switch (followMode) {
+
+	case 0:
+		this->followPositionFactor = vector2(-this->windowSize.x / 2, -this->windowSize.y / 2);
+		break;
+
+	case 1:
+		this->followPositionFactor = vector2(0, 0);
+		break;
+
+	case 2:
+		this->followPositionFactor = vector2(-this->windowSize.x, this->windowSize.y / 2);
+		break;
+
+	case 3:
+		this->followPositionFactor = vector2(this->windowSize.x, -this->windowSize.y / 2);
+		break;
+
+	case 4:
+		this->followPositionFactor = vector2(-this->windowSize.x, -this->windowSize.y);
+		break;
+	}
+}
+
+void camera::follow(vector2* followPosition, float* followSpeed, int followMode) {
+
+	this->followPosition = followPosition;
+	this->followSpeed = *followSpeed;
+
+	switch (followMode) {
+
+	case 0:
+		this->followPositionFactor = vector2(-this->windowSize.x / 2, -this->windowSize.y / 2);
+		break;
+
+	case 1:
+		this->followPositionFactor = vector2(0, 0);
+		break;
+
+	case 2:
+		this->followPositionFactor = vector2(-this->windowSize.x, this->windowSize.y / 2);
+		break;
+
+	case 3:
+		this->followPositionFactor = vector2(this->windowSize.x, -this->windowSize.y / 2);
+		break;
+
+	case 4:
+		this->followPositionFactor = vector2(-this->windowSize.x, -this->windowSize.y);
+		break;
+
+	default:
+		this->followPosition = nullptr;
+		break;
+	}
+}
+
+void camera::stopFollowing() {
+
+	this->followPosition = nullptr;
 }
 
 camera::camera(vector2 position, vector2 windowSize, int mode) {
 
 	this->position = position;
 	this->windowSize = windowSize;
+	this->followPosition = nullptr;
+	this->followSpeed = 0;
 
 	switch (mode) {
 
 	case 0:
-		this->mode = vector2(
+		this->positionFactor = vector2(
 			-windowSize.x / 2, -windowSize.y / 2
 		);
 		break;
 
 	case 1:
-		this->mode = vector2();
+		this->positionFactor = vector2();
 		break;
 
 	case 2:
-		this->mode = vector2(
+		this->positionFactor = vector2(
 			-windowSize.x, 0
 		);
 		break;
 
 	case 3:
-		this->mode = vector2(
+		this->positionFactor = vector2(
 			0, -windowSize.y
 		);
 		break;
 
 	case 4:
-		this->mode = vector2(
+		this->positionFactor = vector2(
 			-windowSize.x, -windowSize.y
 		);
+
+	default:
+		this->positionFactor = vector2(
+			-windowSize.x / 2, -windowSize.y / 2
+		);
+		break;
 	}
 }
 
@@ -170,7 +260,7 @@ std::string getExeDir() {
 
 	std::string executablePath = getExePath();
 	char* exePath = new char[executablePath.length()];
-	strcpy(exePath, executablePath.c_str());
+	strcpy_s(exePath, sizeof(executablePath.length()), executablePath.data());
 	PathRemoveFileSpecA(exePath);
 	std::string directory = std::string(exePath);
 	delete[] exePath;
@@ -182,7 +272,7 @@ bool fileExists(std::string filepath, bool startInExeDir) {
 	if (startInExeDir)
 		filepath = getExeDir() + filepath;
 
-	return access(filepath.data(), 0) == 0;
+	return _access(filepath.data(), 0) == 0;
 }
 
 void writeToFile(std::string filepath, std::string contents, bool startInExeDir) {
@@ -199,6 +289,7 @@ std::string readFromFile(std::string filepath, bool startInExeDir) {
 		filepath = getExeDir() + filepath;
 
 	//read from file at filepath
+	return "";
 }
 
 //file management end
