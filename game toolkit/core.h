@@ -147,14 +147,11 @@ inline float distanceSquared(vector2 a, vector2 b) {
 
 //vector2 end -- camera start
 
-enum eCameraMode {
-
-	CAMERAMODE_CENTER = 0,
-	CAMERAMODE_TOPLEFT = 1,
-	CAMERAMODE_TOPRIGHT = 2,
-	CAMERAMODE_BOTTOMLEFT = 3,
-	CAMERAMODE_BOTTOMRIGHT = 4
-};
+#define CAMERAMODE_CENTER	   0
+#define CAMERAMODE_TOPLEFT	   1
+#define CAMERAMODE_TOPRIGHT    2
+#define CAMERAMODE_BOTTOMLEFT  3
+#define CAMERAMODE_BOTTOMRIGHT 4
 
 struct camera {
 
@@ -232,3 +229,13 @@ bool fileExists(std::string filepath, bool startInExeDir = true);
 
 void writeToFile(std::string filepath, std::string contents, bool startInExeDir = true);
 std::string readFromFile(std::string filepath, bool startInExeDir = true);
+
+//file management end -- deltaTime start
+
+#define DTMODE_SECONDS		0.001
+#define DTMODE_MILLISECONDS 1
+#define DTMODE_MINUTES		0.00001666666667
+
+float getDeltaTime(float dtMode = DTMODE_SECONDS);
+
+//deltaTime end

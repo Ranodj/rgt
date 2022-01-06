@@ -1,26 +1,13 @@
 //FOR TESTING THE LIB
 
-void draw() {
+#include <iostream>
 
-
-}
-
-void input() {
-
-
-}
-
-void update() {
-
-
-}
-
-void logic() {
-
-
-}
+#include "core.h"
 
 int main() {
 
-	return 0;
+	while (true) {
+
+		std::cout << getDeltaTime() << std::endl;
+	}
 }

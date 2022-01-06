@@ -3,6 +3,7 @@
 #include <Shlwapi.h>
 #include <io.h> 
 #include <vector>
+#include <chrono>
 
 #include "core.h"
 #include "rmath.h"
@@ -292,4 +293,14 @@ std::string readFromFile(std::string filepath, bool startInExeDir) {
 	return "";
 }
 
-//file management end
+//file management end -- deltatime start
+
+std::chrono::steady_clock::time_point lastFrameStart;
+float getDeltaTime(float dtMode) {
+
+	std::chrono::duration<float, std::milli> dt = std::chrono::high_resolution_clock::now() - lastFrameStart;
+	lastFrameStart = std::chrono::high_resolution_clock::now();
+	return dt.count() * dtMode;
+}
+
+//deltatime end
